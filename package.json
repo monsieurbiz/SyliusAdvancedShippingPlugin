@@ -9,7 +9,13 @@
   "author": "Monsieur Biz <hello@monsieurbiz.com>",
   "license": "MIT",
   "devDependencies": {
-    "@symfony/webpack-encore": "^4.4.0"
+    "@babel/core": "^7.14.3",
+    "@babel/preset-env": "^7.25.4",
+    "@symfony/webpack-encore": "^4.4.0",
+    "file-loader": "^6.0.0",
+    "path": "^0.12.7",
+    "webpack": "^5.95.0",
+    "webpack-cli": "^5.1.4"
   },
   "dependencies": {
     "leaflet": "^1.9.4"
