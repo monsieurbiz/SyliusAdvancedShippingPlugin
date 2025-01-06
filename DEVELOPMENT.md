@@ -19,3 +19,10 @@ Be sure you have the Symfony binary on your machine.
 You just have to run `make install` on the root of the project and go to http://127.0.0.1:8080 when installation is
 done.
 
+## Update application's JS
+
+Run `yarn install` to install dependencies.
+
+Run `yarn run watch` while coding.
+
+Run `yarn run build` to compile like in production mode after you ended your changes.
