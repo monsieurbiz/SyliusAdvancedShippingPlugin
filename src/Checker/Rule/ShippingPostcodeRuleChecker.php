@@ -36,8 +36,9 @@ final class ShippingPostcodeRuleChecker implements RuleCheckerInterface
         }
 
         if ($shippingAddress->getCountryCode() !== $configuration['countryCode']) {
-            return true;
+            return false;
         }
+        
         /** @var string $postcode */
         $postcode = $shippingAddress->getPostcode();
 

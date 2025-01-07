@@ -2,9 +2,12 @@
 const initReloadCollection = () => {
   const config = document.querySelector('.ui.segment.configuration');
   if (config) {
-    config.addEventListener('DOMSubtreeModified', () => {
-      $('[data-form-type="collection"]').CollectionForm();
-    });
+    const observer = new MutationObserver(mutationList =>  
+      mutationList.filter(m => m.type === 'childList').forEach(m => {  
+        $('[data-form-type="collection"]').CollectionForm();
+      })
+    );
+    observer.observe(config,{childList: true, subtree: true});  
   }
 };
 
