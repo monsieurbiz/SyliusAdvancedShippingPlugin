@@ -4,6 +4,14 @@
 
 The missing plugin for advanced shipping methods in Sylius
 
+## Compatibility
+
+| Sylius Version | PHP Version     |
+|----------------|-----------------|
+| 1.12           | 8.1 - 8.2 - 8.3 |
+| 1.13           | 8.1 - 8.2 - 8.3 |
+| 1.14           | 8.1 - 8.2 - 8.3 |
+
 ## Installation
 
 Install the plugin with composer:

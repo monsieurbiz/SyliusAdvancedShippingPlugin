@@ -20,6 +20,7 @@ trait AdvancedShipmentMetadataAwareTrait
     /**
      * @ORM\Column(name="advanced_shipping_metadata", type="array", nullable=true)
      */
+    #[ORM\Column(name: 'advanced_shipping_metadata', type: 'array', nullable: true)]
     private ?array $advancedShippingMetadata = [];
 
     public function getAdvancedShippingMetadata(): array

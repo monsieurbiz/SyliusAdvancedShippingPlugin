@@ -24,6 +24,7 @@ trait TemporaryAddressesAwareTrait
      *
      * @var Collection<array-key, AddressInterface>
      */
+    #[ORM\OneToMany(targetEntity: AddressInterface::class, mappedBy: 'sourceOrder', cascade: ['persist'])]
     private Collection $temporaryAddresses;
 
     public function getTemporaryAddresses(): Collection

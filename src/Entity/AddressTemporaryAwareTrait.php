@@ -21,12 +21,15 @@ trait AddressTemporaryAwareTrait
     /**
      * @ORM\Column(type="boolean", options={"default"=false})
      */
+    #[ORM\Column(type: 'boolean', options: ['default' => false])]
     private bool $temporary = false;
 
     /**
      * @ORM\ManyToOne(targetEntity=OrderInterface::class, inversedBy="temporaryAddresses")
      * @ORM\JoinColumn(name="source_order_id", referencedColumnName="id", onDelete="SET NULL")
      */
+    #[ORM\ManyToOne(targetEntity: OrderInterface::class, inversedBy: 'temporaryAddresses')]
+    #[ORM\JoinColumn(name: 'source_order_id', referencedColumnName: 'id', onDelete: 'SET NULL')]
     private ?OrderInterface $sourceOrder = null;
 
     public function setTemporary(bool $isTemporary): void

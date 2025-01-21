@@ -20,11 +20,13 @@ trait AddressPickupPointAwareTrait
     /**
      * @ORM\Column(name="pickup_point_type", type="string", length=255, nullable=true)
      */
+    #[ORM\Column(name: 'pickup_point_type', type: 'string', length: 255, nullable: true)]
     private ?string $pickupPointType = null;
 
     /**
      * @ORM\Column(name="pickup_point_code", type="string", length=255, nullable=true)
      */
+    #[ORM\Column(name: 'pickup_point_code', type: 'string', length: 255, nullable: true)]
     private ?string $pickupPointCode = null;
 
     public function getPickupPointType(): ?string

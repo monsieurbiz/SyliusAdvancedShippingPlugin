@@ -22,6 +22,8 @@ trait ShippingTypeAwareTrait
      *
      * @ORM\JoinColumn(name="type_id", referencedColumnName="id", nullable=true)
      */
+    #[ORM\ManyToOne(targetEntity: \MonsieurBiz\SyliusAdvancedShippingPlugin\Entity\ShippingTypeInterface::class, inversedBy: 'methods')]
+    #[ORM\JoinColumn(name: 'type_id', referencedColumnName: 'id', nullable: true)]
     private ?ShippingTypeInterface $type = null;
 
     public function getType(): ?ShippingTypeInterface
