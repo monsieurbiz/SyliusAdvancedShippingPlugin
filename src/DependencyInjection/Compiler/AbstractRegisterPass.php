@@ -5,7 +5,7 @@
  *
  * (c) Monsieur Biz <sylius@monsieurbiz.com>
  *
- * For the full copyright and license information, please view the LICENSE
+ * For the full copyright and license information, please view the LICENSE.txt
  * file that was distributed with this source code.
  */
 
@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace MonsieurBiz\SyliusAdvancedShippingPlugin\DependencyInjection\Compiler;
 
+use InvalidArgumentException;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Reference;
@@ -65,7 +66,7 @@ abstract class AbstractRegisterPass
     private function validate(string $tag, array $configuration): void
     {
         if (!isset($configuration['code'], $configuration['label'])) {
-            throw new \InvalidArgumentException(sprintf('Service tagged with %s needs to have `code` and `label` attributes.', $tag));
+            throw new InvalidArgumentException(\sprintf('Service tagged with %s needs to have `code` and `label` attributes.', $tag));
         }
     }
 

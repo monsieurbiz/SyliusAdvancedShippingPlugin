@@ -5,7 +5,7 @@
  *
  * (c) Monsieur Biz <sylius@monsieurbiz.com>
  *
- * For the full copyright and license information, please view the LICENSE
+ * For the full copyright and license information, please view the LICENSE.txt
  * file that was distributed with this source code.
  */
 
@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace MonsieurBiz\SyliusAdvancedShippingPlugin\Form\DataTransformer;
 
+use DateTime;
 use MonsieurBiz\SyliusAdvancedShippingPlugin\Model\HolidayTimeSlot;
 use MonsieurBiz\SyliusAdvancedShippingPlugin\Model\OpeningDay;
 use MonsieurBiz\SyliusAdvancedShippingPlugin\Model\OpeningDayTimeSlot;
@@ -82,8 +83,8 @@ final class JsonToPickupPointTransformer implements DataTransformerInterface
 
         if ($data['holidayItems']) {
             foreach ($data['holidayItems'] as $itemData) {
-                $startTime = \DateTime::createFromFormat('d/m/Y', $itemData['startTime']);
-                $endTime = \DateTime::createFromFormat('d/m/Y', $itemData['startTime']);
+                $startTime = DateTime::createFromFormat('d/m/Y', $itemData['startTime']);
+                $endTime = DateTime::createFromFormat('d/m/Y', $itemData['startTime']);
                 if (false === $startTime || false === $endTime) {
                     continue;
                 }

@@ -5,7 +5,7 @@
  *
  * (c) Monsieur Biz <sylius@monsieurbiz.com>
  *
- * For the full copyright and license information, please view the LICENSE
+ * For the full copyright and license information, please view the LICENSE.txt
  * file that was distributed with this source code.
  */
 
@@ -19,7 +19,6 @@ trait AddressProviderAwareTrait
 {
     /**
      * @ORM\ManyToOne(targetEntity=\MonsieurBiz\SyliusAdvancedShippingPlugin\Entity\ShippingAddressProviderConfiguration::class)
-     *
      * @ORM\JoinColumn(name="shipping_address_provider_configuration_id", referencedColumnName="id", nullable=true)
      */
     #[ORM\ManyToOne(targetEntity: \MonsieurBiz\SyliusAdvancedShippingPlugin\Entity\ShippingAddressProviderConfiguration::class)]

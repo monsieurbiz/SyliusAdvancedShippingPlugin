@@ -5,7 +5,7 @@
  *
  * (c) Monsieur Biz <sylius@monsieurbiz.com>
  *
- * For the full copyright and license information, please view the LICENSE
+ * For the full copyright and license information, please view the LICENSE.txt
  * file that was distributed with this source code.
  */
 
@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace MonsieurBiz\SyliusAdvancedShippingPlugin\Entity;
 
+use DateTimeInterface;
 use Sylius\Component\Resource\Model\TimestampableTrait;
 use Sylius\Component\Resource\Model\TranslatableTrait;
 
@@ -35,12 +36,12 @@ class ShippingCalculatorConfiguration implements ShippingCalculatorConfiguration
     protected array $configuration = [];
 
     /**
-     * @var \DateTimeInterface|null
+     * @var DateTimeInterface|null
      */
     protected $createdAt;
 
     /**
-     * @var \DateTimeInterface|null
+     * @var DateTimeInterface|null
      */
     protected $updatedAt;
 

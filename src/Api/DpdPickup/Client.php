@@ -5,7 +5,7 @@
  *
  * (c) Monsieur Biz <sylius@monsieurbiz.com>
  *
- * For the full copyright and license information, please view the LICENSE
+ * For the full copyright and license information, please view the LICENSE.txt
  * file that was distributed with this source code.
  */
 
@@ -13,6 +13,10 @@ declare(strict_types=1);
 
 namespace MonsieurBiz\SyliusAdvancedShippingPlugin\Api\DpdPickup;
 
+use DateTime;
+use DOMDocument;
+use DOMElement;
+use Exception;
 use MonsieurBiz\SyliusAdvancedShippingPlugin\Api\DpdPickup\Config\DpdPickupConfigInterface;
 use MonsieurBiz\SyliusAdvancedShippingPlugin\Api\DpdPickup\Model\PickupPointListQuery;
 use MonsieurBiz\SyliusAdvancedShippingPlugin\Api\DpdPickup\Model\PickupPointListQueryInterface;
@@ -25,6 +29,7 @@ use MonsieurBiz\SyliusAdvancedShippingPlugin\Model\PickupPointInterface;
 use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerAwareTrait;
 use Psr\Log\NullLogger;
+use SimpleXMLElement;
 use Symfony\Component\HttpClient\HttpClient;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 
@@ -60,7 +65,7 @@ final class Client implements ClientInterface, LoggerAwareInterface
 
         foreach ($params as $param => $getter) {
             if (empty($config->{$getter}())) {
-                throw new MissingApiConfigurationParamException(sprintf('The param %s is mandatary for DPD Pickup client', $param));
+                throw new MissingApiConfigurationParamException(\sprintf('The param %s is mandatary for DPD Pickup client', $param));
             }
         }
     }
@@ -87,11 +92,11 @@ final class Client implements ClientInterface, LoggerAwareInterface
                 'holiday_tolerant' => $query->getHolidayTolerant() ?? '',
             ];
 
-            $url = sprintf('%s?%s', $this->config->getPickupApiUrl(), http_build_query($params));
+            $url = \sprintf('%s?%s', $this->config->getPickupApiUrl(), http_build_query($params));
             $response = $this->httpClient->request('GET', $url);
 
             return $this->transformResponseContent($response->getContent());
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             $this->logger?->error((string) $e);
 
             return [];
@@ -101,7 +106,7 @@ final class Client implements ClientInterface, LoggerAwareInterface
     private function transformResponseContent(string $content): array
     {
         $list = [];
-        $document = new \DOMDocument();
+        $document = new DOMDocument();
         $document->loadXML($content);
         $items = $document->getElementsByTagName('PUDO_ITEM');
         foreach ($items as $item) {
@@ -115,7 +120,7 @@ final class Client implements ClientInterface, LoggerAwareInterface
         return $list;
     }
 
-    private function createPickupPoint(\DOMElement $node): ?PickupPointInterface
+    private function createPickupPoint(DOMElement $node): ?PickupPointInterface
     {
         $item = simplexml_import_dom($node);
         if (null === $item) {
@@ -167,22 +172,22 @@ final class Client implements ClientInterface, LoggerAwareInterface
         return $this->getPickupPoints($query);
     }
 
-    private function getCleanedString(\SimpleXMLElement $element, string $parameter): string
+    private function getCleanedString(SimpleXMLElement $element, string $parameter): string
     {
         return trim((string) $element->{$parameter});
     }
 
-    private function getCleanedInt(\SimpleXMLElement $element, string $parameter): int
+    private function getCleanedInt(SimpleXMLElement $element, string $parameter): int
     {
         return (int) $this->getCleanedString($element, $parameter);
     }
 
-    private function getCleanedFloat(\SimpleXMLElement $element, string $parameter): float
+    private function getCleanedFloat(SimpleXMLElement $element, string $parameter): float
     {
         return (float) str_replace(',', '.', $this->getCleanedString($element, $parameter));
     }
 
-    private function createOpeningDays(\DOMElement $node): array
+    private function createOpeningDays(DOMElement $node): array
     {
         $openingDays = [];
         foreach ($node->getElementsByTagName('OPENING_HOURS_ITEM') as $data) {
@@ -208,7 +213,7 @@ final class Client implements ClientInterface, LoggerAwareInterface
     /**
      * @SuppressWarnings(PHPMD.CyclomaticComplexity)
      */
-    private function createHolidayItems(\DOMElement $node): array
+    private function createHolidayItems(DOMElement $node): array
     {
         $holidayItems = [];
         foreach ($node->getElementsByTagName('HOLIDAY_ITEM') as $data) {
@@ -216,8 +221,8 @@ final class Client implements ClientInterface, LoggerAwareInterface
             if (null === $data) {
                 continue;
             }
-            $startTime = \DateTime::createFromFormat('d/m/Y', $this->getCleanedString($data, 'START_DTM'));
-            $endTime = \DateTime::createFromFormat('d/m/Y', $this->getCleanedString($data, 'END_DTM'));
+            $startTime = DateTime::createFromFormat('d/m/Y', $this->getCleanedString($data, 'START_DTM'));
+            $endTime = DateTime::createFromFormat('d/m/Y', $this->getCleanedString($data, 'END_DTM'));
             if (false === $startTime || false === $endTime) {
                 continue;
             }

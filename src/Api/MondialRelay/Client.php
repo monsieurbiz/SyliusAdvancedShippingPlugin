@@ -5,7 +5,7 @@
  *
  * (c) Monsieur Biz <sylius@monsieurbiz.com>
  *
- * For the full copyright and license information, please view the LICENSE
+ * For the full copyright and license information, please view the LICENSE.txt
  * file that was distributed with this source code.
  */
 
@@ -13,6 +13,8 @@ declare(strict_types=1);
 
 namespace MonsieurBiz\SyliusAdvancedShippingPlugin\Api\MondialRelay;
 
+use DateTime;
+use Exception;
 use MondialRelay\ApiClient;
 use MondialRelay\BussinessHours\BussinessHours;
 use MondialRelay\Point\Point;
@@ -26,6 +28,7 @@ use MonsieurBiz\SyliusAdvancedShippingPlugin\Model\PickupPointInterface;
 use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerAwareTrait;
 use Psr\Log\NullLogger;
+use SoapClient;
 
 final class Client implements ClientInterface, LoggerAwareInterface
 {
@@ -40,7 +43,7 @@ final class Client implements ClientInterface, LoggerAwareInterface
     {
         self::validateConfig($config);
         $wsdl = rtrim($config->getUrl(), ' /') . '?WSDL';
-        $soapClient = new \SoapClient($wsdl);
+        $soapClient = new SoapClient($wsdl);
         $apiClient = new ApiClient($soapClient, $config->getIdentifier(), $config->getKey());
 
         return new static($config, $apiClient);
@@ -58,7 +61,7 @@ final class Client implements ClientInterface, LoggerAwareInterface
 
         foreach ($params as $param => $getter) {
             if (empty($config->{$getter}())) {
-                throw new MissingApiConfigurationParamException(sprintf('The param %s is mandatary for Mondial Relay client', $param));
+                throw new MissingApiConfigurationParamException(\sprintf('The param %s is mandatary for Mondial Relay client', $param));
             }
         }
     }
@@ -123,7 +126,7 @@ final class Client implements ClientInterface, LoggerAwareInterface
             foreach ($deliveryPoints as $deliveryPoint) {
                 $pickupPoints[] = $this->createPickupPoint($deliveryPoint);
             }
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             $this->logger?->critical($e->getMessage());
         } finally {
             return $pickupPoints;
@@ -159,7 +162,7 @@ final class Client implements ClientInterface, LoggerAwareInterface
                 continue;
             }
 
-            $dayCode = (int) (new \DateTime())->setTimestamp(strtotime($businessHour->day()))->format('w');
+            $dayCode = (int) (new DateTime())->setTimestamp(strtotime($businessHour->day()))->format('w');
             $openingDay = new OpeningDay();
             $openingDay->setDayCode($dayCode);
 

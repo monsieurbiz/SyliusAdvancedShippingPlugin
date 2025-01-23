@@ -5,13 +5,15 @@
  *
  * (c) Monsieur Biz <sylius@monsieurbiz.com>
  *
- * For the full copyright and license information, please view the LICENSE
+ * For the full copyright and license information, please view the LICENSE.txt
  * file that was distributed with this source code.
  */
 
 declare(strict_types=1);
 
 namespace MonsieurBiz\SyliusAdvancedShippingPlugin\Api\ChronopostPickup\Model;
+
+use DateTime;
 
 abstract class AbstractPickupPointListQuery
 {
@@ -42,7 +44,7 @@ abstract class AbstractPickupPointListQuery
         $this->type = PickupPointListQueryInterface::DEFAULT_TYPE;
         $this->service = PickupPointListQueryInterface::DEFAULT_SERVICE;
         $this->weight = PickupPointListQueryInterface::DEFAULT_WEIGHT;
-        $this->shippingDate = (new \DateTime())->format('d/m/Y');
+        $this->shippingDate = (new DateTime())->format('d/m/Y');
         $this->maxPointChronopost = PickupPointListQueryInterface::DEFAULT_MAX_POINT_CHRONOPOST;
         $this->maxDistanceSearch = PickupPointListQueryInterface::DEFAULT_MAX_DISTANCE_SEARCH;
         $this->holidayTolerant = PickupPointListQueryInterface::DEFAULT_HOLIDAY_TOLERANT;

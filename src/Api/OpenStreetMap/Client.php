@@ -5,7 +5,7 @@
  *
  * (c) Monsieur Biz <sylius@monsieurbiz.com>
  *
- * For the full copyright and license information, please view the LICENSE
+ * For the full copyright and license information, please view the LICENSE.txt
  * file that was distributed with this source code.
  */
 
@@ -15,6 +15,7 @@ namespace MonsieurBiz\SyliusAdvancedShippingPlugin\Api\OpenStreetMap;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Exception;
 use MonsieurBiz\SyliusAdvancedShippingPlugin\Model\AddressAutocomplete\Location;
 use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerAwareTrait;
@@ -50,7 +51,7 @@ final class Client implements ClientInterface, LoggerAwareInterface
         $locations = [];
 
         try {
-            $url = sprintf('%s?%s', self::NOMINATIM_API_URL . '/search', http_build_query($params));
+            $url = \sprintf('%s?%s', self::NOMINATIM_API_URL . '/search', http_build_query($params));
             $response = $this->httpClient->request('GET', $url);
             foreach ($response->toArray() as $place) {
                 $address = $place['address'] ?? [];
@@ -66,7 +67,7 @@ final class Client implements ClientInterface, LoggerAwareInterface
                     (float) ($place['lon'] ?? null),
                 );
             }
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             $this->logger?->critical($e->getMessage());
         }
 

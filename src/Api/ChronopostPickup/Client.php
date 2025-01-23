@@ -5,7 +5,7 @@
  *
  * (c) Monsieur Biz <sylius@monsieurbiz.com>
  *
- * For the full copyright and license information, please view the LICENSE
+ * For the full copyright and license information, please view the LICENSE.txt
  * file that was distributed with this source code.
  */
 
@@ -13,6 +13,8 @@ declare(strict_types=1);
 
 namespace MonsieurBiz\SyliusAdvancedShippingPlugin\Api\ChronopostPickup;
 
+use DateTime;
+use Exception;
 use MonsieurBiz\SyliusAdvancedShippingPlugin\Api\ChronopostPickup\Config\ChronopostPickupConfigInterface;
 use MonsieurBiz\SyliusAdvancedShippingPlugin\Api\ChronopostPickup\Model\AddressPickupPointListQuery;
 use MonsieurBiz\SyliusAdvancedShippingPlugin\Api\ChronopostPickup\Model\GeoPickupPointListQuery;
@@ -27,6 +29,8 @@ use MonsieurBiz\SyliusAdvancedShippingPlugin\Model\PickupPointInterface;
 use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerAwareTrait;
 use Psr\Log\NullLogger;
+use SoapClient;
+use stdClass;
 
 final class Client implements ClientInterface, LoggerAwareInterface
 {
@@ -39,9 +43,9 @@ final class Client implements ClientInterface, LoggerAwareInterface
 
     private ChronopostPickupConfigInterface $config;
 
-    private \SoapClient $soapClient;
+    private SoapClient $soapClient;
 
-    public function __construct(ChronopostPickupConfigInterface $config, \SoapClient $soapClient)
+    public function __construct(ChronopostPickupConfigInterface $config, SoapClient $soapClient)
     {
         $this->config = $config;
         $this->soapClient = $soapClient;
@@ -52,7 +56,7 @@ final class Client implements ClientInterface, LoggerAwareInterface
     {
         self::validateConfig($config);
 
-        $soapClient = new \SoapClient(
+        $soapClient = new SoapClient(
             $config->getPickupApiUrl(),
             ['classmap' => self::CLASS_MAP, 'trace' => 1]
         );
@@ -70,7 +74,7 @@ final class Client implements ClientInterface, LoggerAwareInterface
 
         foreach ($params as $param => $getter) {
             if (empty($config->{$getter}())) {
-                throw new MissingApiConfigurationParamException(sprintf('The param %s is mandatary Chronopost DPD Pickup client', $param));
+                throw new MissingApiConfigurationParamException(\sprintf('The param %s is mandatary Chronopost DPD Pickup client', $param));
             }
         }
     }
@@ -115,7 +119,7 @@ final class Client implements ClientInterface, LoggerAwareInterface
 
                 $list[] = $pickupPoint;
             }
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             $this->logger?->error((string) $e);
 
             return $list;
@@ -124,7 +128,7 @@ final class Client implements ClientInterface, LoggerAwareInterface
         return $list;
     }
 
-    private function createHolidayTimeSlots(\stdClass $pickupPoint): array
+    private function createHolidayTimeSlots(stdClass $pickupPoint): array
     {
         if ($this->isValidHolidayDateList($pickupPoint)) {
             return [];
@@ -137,8 +141,8 @@ final class Client implements ClientInterface, LoggerAwareInterface
             }
 
             $holidayTimeSlot = new HolidayTimeSlot();
-            $holidayTimeSlot->setStartTime(new \DateTime($data->calendarDeDebut));
-            $holidayTimeSlot->setEndTime(new \DateTime($data->calendarDeFin));
+            $holidayTimeSlot->setStartTime(new DateTime($data->calendarDeDebut));
+            $holidayTimeSlot->setEndTime(new DateTime($data->calendarDeFin));
             $holidayTimeSlots[] = $holidayTimeSlot;
         }
 
@@ -148,7 +152,7 @@ final class Client implements ClientInterface, LoggerAwareInterface
     /**
      * @SuppressWarnings(PHPMD.CyclomaticComplexity)
      */
-    private function createOpeningDays(\stdClass $pickupPoint): array
+    private function createOpeningDays(stdClass $pickupPoint): array
     {
         $openingDays = [];
         foreach ($pickupPoint->listeHoraireOuverture ?? [] as $data) {
@@ -162,7 +166,7 @@ final class Client implements ClientInterface, LoggerAwareInterface
 
             // API does not return an array when only one result, so whe manage it
             if (isset($data->listeHoraireOuverture->debut, $data->listeHoraireOuverture->fin)) {
-                $dataSlot = new \stdClass();
+                $dataSlot = new stdClass();
                 $dataSlot->debut = $data->listeHoraireOuverture->debut;
                 $dataSlot->fin = $data->listeHoraireOuverture->fin;
                 $data->listeHoraireOuverture = [$dataSlot];
@@ -186,7 +190,7 @@ final class Client implements ClientInterface, LoggerAwareInterface
     /**
      * @SuppressWarnings(PHPMD.CyclomaticComplexity)
      */
-    private function isValidResponse(\stdClass $response): bool
+    private function isValidResponse(stdClass $response): bool
     {
         return
             isset($response->return)
@@ -230,14 +234,14 @@ final class Client implements ClientInterface, LoggerAwareInterface
         return $this->getPickupPoints('recherchePointChronopostParCoordonneesGeographiques', $query);
     }
 
-    private function isValidHolidayDateList(\stdClass $pickupPoint): bool
+    private function isValidHolidayDateList(stdClass $pickupPoint): bool
     {
         return
             false === isset($pickupPoint->listePeriodeFermeture)
             || false === \is_array($pickupPoint->listePeriodeFermeture);
     }
 
-    private function isValidHolidaySlot(\stdClass $data): bool
+    private function isValidHolidaySlot(stdClass $data): bool
     {
         return
             false === isset($data->calendarDeDebut)

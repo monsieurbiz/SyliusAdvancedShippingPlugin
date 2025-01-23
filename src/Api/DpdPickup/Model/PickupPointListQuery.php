@@ -5,13 +5,16 @@
  *
  * (c) Monsieur Biz <sylius@monsieurbiz.com>
  *
- * For the full copyright and license information, please view the LICENSE
+ * For the full copyright and license information, please view the LICENSE.txt
  * file that was distributed with this source code.
  */
 
 declare(strict_types=1);
 
 namespace MonsieurBiz\SyliusAdvancedShippingPlugin\Api\DpdPickup\Model;
+
+use DateTime;
+use DateTimeInterface;
 
 final class PickupPointListQuery implements PickupPointListQueryInterface
 {
@@ -23,7 +26,7 @@ final class PickupPointListQuery implements PickupPointListQueryInterface
 
     private string $requestId;
 
-    private \DateTimeInterface $dateFrom;
+    private DateTimeInterface $dateFrom;
 
     private ?string $address = null;
 
@@ -46,7 +49,7 @@ final class PickupPointListQuery implements PickupPointListQueryInterface
         $this->carrier = self::DEFAULT_CARRIER;
         $this->key = self::DEFAULT_KEY;
         $this->requestId = self::DEFAULT_REQUEST_ID;
-        $this->dateFrom = new \DateTime();
+        $this->dateFrom = new DateTime();
     }
 
     public function getCarrier(): string
@@ -89,12 +92,12 @@ final class PickupPointListQuery implements PickupPointListQueryInterface
         $this->requestId = $requestId;
     }
 
-    public function getDateFrom(): \DateTimeInterface
+    public function getDateFrom(): DateTimeInterface
     {
         return $this->dateFrom;
     }
 
-    public function setDateFrom(\DateTimeInterface $dateFrom): void
+    public function setDateFrom(DateTimeInterface $dateFrom): void
     {
         $this->dateFrom = $dateFrom;
     }

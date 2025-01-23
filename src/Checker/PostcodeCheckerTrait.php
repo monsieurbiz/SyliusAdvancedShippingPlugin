@@ -5,7 +5,7 @@
  *
  * (c) Monsieur Biz <sylius@monsieurbiz.com>
  *
- * For the full copyright and license information, please view the LICENSE
+ * For the full copyright and license information, please view the LICENSE.txt
  * file that was distributed with this source code.
  */
 
@@ -67,7 +67,7 @@ trait PostcodeCheckerTrait
     {
         $conditions = explode(',', $rule);
         foreach ($conditions as $expr) {
-            $expr = sprintf('/^%s$/', str_replace('*', '[0-9a-zA-Z]+', trim($expr)));
+            $expr = \sprintf('/^%s$/', str_replace('*', '[0-9a-zA-Z]+', trim($expr)));
             $found = (bool) preg_match($expr, $postcode);
             if (true === $found) {
                 return true;

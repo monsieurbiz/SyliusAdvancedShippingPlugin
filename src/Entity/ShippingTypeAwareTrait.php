@@ -5,7 +5,7 @@
  *
  * (c) Monsieur Biz <sylius@monsieurbiz.com>
  *
- * For the full copyright and license information, please view the LICENSE
+ * For the full copyright and license information, please view the LICENSE.txt
  * file that was distributed with this source code.
  */
 
@@ -19,7 +19,6 @@ trait ShippingTypeAwareTrait
 {
     /**
      * @ORM\ManyToOne(targetEntity=\MonsieurBiz\SyliusAdvancedShippingPlugin\Entity\ShippingTypeInterface::class, inversedBy="methods")
-     *
      * @ORM\JoinColumn(name="type_id", referencedColumnName="id", nullable=true)
      */
     #[ORM\ManyToOne(targetEntity: \MonsieurBiz\SyliusAdvancedShippingPlugin\Entity\ShippingTypeInterface::class, inversedBy: 'methods')]
