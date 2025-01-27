@@ -18,6 +18,9 @@ use MonsieurBiz\SyliusAdvancedShippingPlugin\Form\Type\Calculator\TableRateCalcu
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
+/**
+ * @SuppressWarnings(PHPMD.LongClassName)
+ */
 final class TotalBasedTableRateCalculatorConfigurationType extends AbstractType
 {
     public function configureOptions(OptionsResolver $resolver): void

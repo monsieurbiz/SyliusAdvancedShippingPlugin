@@ -72,7 +72,7 @@ class ShippingCalculatorConfiguration implements ShippingCalculatorConfiguration
 
     public function setCode(?string $code): void
     {
-        $this->code = $code;
+        $this->code = (string) $code;
     }
 
     public function getName(): string

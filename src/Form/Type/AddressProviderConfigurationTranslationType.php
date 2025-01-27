@@ -17,6 +17,9 @@ use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 
+/**
+ * @SuppressWarnings(PHPMD.LongClassName)
+ */
 final class AddressProviderConfigurationTranslationType extends AbstractResourceType
 {
     /**

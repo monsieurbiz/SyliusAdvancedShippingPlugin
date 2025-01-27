@@ -21,7 +21,7 @@ trait AddressProviderAwareTrait
      * @ORM\ManyToOne(targetEntity=\MonsieurBiz\SyliusAdvancedShippingPlugin\Entity\ShippingAddressProviderConfiguration::class)
      * @ORM\JoinColumn(name="shipping_address_provider_configuration_id", referencedColumnName="id", nullable=true)
      */
-    #[ORM\ManyToOne(targetEntity: \MonsieurBiz\SyliusAdvancedShippingPlugin\Entity\ShippingAddressProviderConfiguration::class)]
+    #[ORM\ManyToOne(targetEntity: ShippingAddressProviderConfiguration::class)]
     #[ORM\JoinColumn(name: 'shipping_address_provider_configuration_id', referencedColumnName: 'id', nullable: true)]
     private ?ShippingAddressProviderConfigurationInterface $shippingAddressProviderConfiguration = null;
 

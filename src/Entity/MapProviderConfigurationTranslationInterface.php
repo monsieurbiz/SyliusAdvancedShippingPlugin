@@ -16,6 +16,9 @@ namespace MonsieurBiz\SyliusAdvancedShippingPlugin\Entity;
 use Sylius\Component\Resource\Model\ResourceInterface;
 use Sylius\Component\Resource\Model\TranslationInterface;
 
+/**
+ * @SuppressWarnings(PHPMD.LongClassName)
+ */
 interface MapProviderConfigurationTranslationInterface extends ResourceInterface, TranslationInterface
 {
     public function getId(): int;

@@ -15,6 +15,9 @@ namespace MonsieurBiz\SyliusAdvancedShippingPlugin\Entity;
 
 use Sylius\Component\Resource\Model\AbstractTranslation;
 
+/**
+ * @SuppressWarnings(PHPMD.LongClassName)
+ */
 class ShippingAddressProviderConfigurationTranslation extends AbstractTranslation implements ShippingAddressProviderConfigurationTranslationInterface
 {
     protected int $id;

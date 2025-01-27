@@ -24,7 +24,7 @@ final class MapboxMapProvider extends AbstractMapProvider implements MapProvider
 
     public function getUrl(): string
     {
-        return 'https://api.mapbox.com/styles/v1/mapbox/streets-v11/tiles/{z}/{x}/{y}?access_token=' . $this->getConfiguration()['accessToken'] ?? '';
+        return 'https://api.mapbox.com/styles/v1/mapbox/streets-v11/tiles/{z}/{x}/{y}?access_token=' . $this->getConfiguration()['accessToken'];
     }
 
     public function getParameters(): array

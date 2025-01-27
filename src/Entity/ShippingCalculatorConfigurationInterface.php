@@ -17,6 +17,9 @@ use Sylius\Component\Resource\Model\ResourceInterface;
 use Sylius\Component\Resource\Model\TimestampableInterface;
 use Sylius\Component\Resource\Model\TranslatableInterface;
 
+/**
+ * @SuppressWarnings(PHPMD.LongClassName)
+ */
 interface ShippingCalculatorConfigurationInterface extends ResourceInterface, TimestampableInterface, TranslatableInterface
 {
     public function getId(): int;

@@ -16,6 +16,9 @@ namespace MonsieurBiz\SyliusAdvancedShippingPlugin\Form\Type\AddressProvider;
 use MonsieurBiz\SyliusAdvancedShippingPlugin\Form\Type\AdvancedShippingMetadata\AbstractAdvancedShippingMetadataType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
+/**
+ * @SuppressWarnings(PHPMD.LongClassName)
+ */
 final class ChronopostPickupAddressProviderMetadataType extends AbstractAdvancedShippingMetadataType
 {
     public function configureOptions(OptionsResolver $resolver): void

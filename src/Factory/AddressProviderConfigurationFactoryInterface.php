@@ -16,6 +16,9 @@ namespace MonsieurBiz\SyliusAdvancedShippingPlugin\Factory;
 use MonsieurBiz\SyliusAdvancedShippingPlugin\Entity\ShippingAddressProviderConfigurationInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
+/**
+ * @SuppressWarnings(PHPMD.LongClassName)
+ */
 interface AddressProviderConfigurationFactoryInterface extends FactoryInterface
 {
     public function createWithAddressProvider(string $providerName): ShippingAddressProviderConfigurationInterface;

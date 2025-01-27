@@ -23,8 +23,6 @@ use MonsieurBiz\SyliusAdvancedShippingPlugin\Form\Type\AddressProvider\MondialRe
 use MonsieurBiz\SyliusAdvancedShippingPlugin\Model\PickupPointInterface;
 use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
-use Symfony\Component\PropertyAccess\PropertyAccess;
-use Symfony\Component\PropertyAccess\PropertyAccessor;
 
 final class MondialRelayShippingAddressProvider extends AbstractPickupShippingAddressProvider implements ShippingAddressProviderInterface
 {
@@ -32,13 +30,10 @@ final class MondialRelayShippingAddressProvider extends AbstractPickupShippingAd
 
     private const FORM_TEMPLATE = '@MonsieurBizSyliusAdvancedShippingPlugin/Shop/Checkout/SelectShipping/Shipment/AddressProvider/_pickupPointAddressProvider.html.twig';
 
-    private PropertyAccessor $accessor;
-
     public function __construct(
         private ClientFactoryInterface $clientFactory,
         private FactoryInterface $addressFactory
     ) {
-        $this->accessor = PropertyAccess::createPropertyAccessor();
     }
 
     public function getShipmentMetadataFormType(): ?string

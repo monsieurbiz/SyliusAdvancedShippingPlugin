@@ -22,7 +22,6 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Validator\Constraints as Assert;
-use Twig\Environment;
 
 final class ShippingPostcodeRuleConfigurationType extends AbstractType
 {
@@ -30,14 +29,10 @@ final class ShippingPostcodeRuleConfigurationType extends AbstractType
 
     private RepositoryInterface $countryRepository;
 
-    private Environment $twig;
-
     public function __construct(
         RepositoryInterface $countryRepository,
-        Environment $twig
     ) {
         $this->countryRepository = $countryRepository;
-        $this->twig = $twig;
     }
 
     /**
