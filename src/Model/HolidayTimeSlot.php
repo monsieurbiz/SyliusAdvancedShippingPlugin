@@ -5,7 +5,7 @@
  *
  * (c) Monsieur Biz <sylius@monsieurbiz.com>
  *
- * For the full copyright and license information, please view the LICENSE
+ * For the full copyright and license information, please view the LICENSE.txt
  * file that was distributed with this source code.
  */
 
@@ -13,28 +13,31 @@ declare(strict_types=1);
 
 namespace MonsieurBiz\SyliusAdvancedShippingPlugin\Model;
 
-class HolidayTimeSlot implements HolidayTimeSlotInterface, \JsonSerializable
+use DateTime;
+use JsonSerializable;
+
+class HolidayTimeSlot implements HolidayTimeSlotInterface, JsonSerializable
 {
-    private ?\DateTime $startTime = null;
+    private ?DateTime $startTime = null;
 
-    private ?\DateTime $endTime = null;
+    private ?DateTime $endTime = null;
 
-    public function setStartTime(\DateTime $time): void
+    public function setStartTime(DateTime $time): void
     {
         $this->startTime = $time;
     }
 
-    public function getStartTime(): ?\DateTime
+    public function getStartTime(): ?DateTime
     {
         return $this->startTime;
     }
 
-    public function setEndTime(\DateTime $time): void
+    public function setEndTime(DateTime $time): void
     {
         $this->endTime = $time;
     }
 
-    public function getEndTime(): ?\DateTime
+    public function getEndTime(): ?DateTime
     {
         return $this->endTime;
     }

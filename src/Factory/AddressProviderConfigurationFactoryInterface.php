@@ -5,7 +5,7 @@
  *
  * (c) Monsieur Biz <sylius@monsieurbiz.com>
  *
- * For the full copyright and license information, please view the LICENSE
+ * For the full copyright and license information, please view the LICENSE.txt
  * file that was distributed with this source code.
  */
 
@@ -16,6 +16,9 @@ namespace MonsieurBiz\SyliusAdvancedShippingPlugin\Factory;
 use MonsieurBiz\SyliusAdvancedShippingPlugin\Entity\ShippingAddressProviderConfigurationInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
+/**
+ * @SuppressWarnings(PHPMD.LongClassName)
+ */
 interface AddressProviderConfigurationFactoryInterface extends FactoryInterface
 {
     public function createWithAddressProvider(string $providerName): ShippingAddressProviderConfigurationInterface;

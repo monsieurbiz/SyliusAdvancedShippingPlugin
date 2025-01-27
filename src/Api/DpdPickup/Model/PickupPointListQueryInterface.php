@@ -5,13 +5,15 @@
  *
  * (c) Monsieur Biz <sylius@monsieurbiz.com>
  *
- * For the full copyright and license information, please view the LICENSE
+ * For the full copyright and license information, please view the LICENSE.txt
  * file that was distributed with this source code.
  */
 
 declare(strict_types=1);
 
 namespace MonsieurBiz\SyliusAdvancedShippingPlugin\Api\DpdPickup\Model;
+
+use DateTimeInterface;
 
 interface PickupPointListQueryInterface
 {
@@ -37,9 +39,9 @@ interface PickupPointListQueryInterface
 
     public function setRequestId(string $requestId): void;
 
-    public function getDateFrom(): \DateTimeInterface;
+    public function getDateFrom(): DateTimeInterface;
 
-    public function setDateFrom(\DateTimeInterface $dateFrom): void;
+    public function setDateFrom(DateTimeInterface $dateFrom): void;
 
     public function getAddress(): ?string;
 

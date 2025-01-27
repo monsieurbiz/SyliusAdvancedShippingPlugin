@@ -5,7 +5,7 @@
  *
  * (c) Monsieur Biz <sylius@monsieurbiz.com>
  *
- * For the full copyright and license information, please view the LICENSE
+ * For the full copyright and license information, please view the LICENSE.txt
  * file that was distributed with this source code.
  */
 
@@ -23,16 +23,12 @@ use MonsieurBiz\SyliusAdvancedShippingPlugin\Form\Type\AddressProvider\DpdPickup
 use MonsieurBiz\SyliusAdvancedShippingPlugin\Model\PickupPointInterface;
 use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
-use Symfony\Component\PropertyAccess\PropertyAccess;
-use Symfony\Component\PropertyAccess\PropertyAccessor;
 
 final class DpdPickupShippingAddressProvider extends AbstractPickupShippingAddressProvider implements ShippingAddressProviderInterface
 {
     public const TYPE = 'dpd_pickup';
 
     private const FORM_TEMPLATE = '@MonsieurBizSyliusAdvancedShippingPlugin/Shop/Checkout/SelectShipping/Shipment/AddressProvider/_pickupPointAddressProvider.html.twig';
-
-    private PropertyAccessor $accessor;
 
     private ClientFactoryInterface $clientFactory;
 
@@ -42,7 +38,6 @@ final class DpdPickupShippingAddressProvider extends AbstractPickupShippingAddre
         ClientFactoryInterface $clientFactory,
         FactoryInterface $addressFactory
     ) {
-        $this->accessor = PropertyAccess::createPropertyAccessor();
         $this->clientFactory = $clientFactory;
         $this->addressFactory = $addressFactory;
     }

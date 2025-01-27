@@ -5,7 +5,7 @@
  *
  * (c) Monsieur Biz <sylius@monsieurbiz.com>
  *
- * For the full copyright and license information, please view the LICENSE
+ * For the full copyright and license information, please view the LICENSE.txt
  * file that was distributed with this source code.
  */
 
@@ -24,7 +24,7 @@ final class MapboxMapProvider extends AbstractMapProvider implements MapProvider
 
     public function getUrl(): string
     {
-        return 'https://api.mapbox.com/styles/v1/mapbox/streets-v11/tiles/{z}/{x}/{y}?access_token=' . $this->getConfiguration()['accessToken'] ?? '';
+        return 'https://api.mapbox.com/styles/v1/mapbox/streets-v11/tiles/{z}/{x}/{y}?access_token=' . $this->getConfiguration()['accessToken'];
     }
 
     public function getParameters(): array

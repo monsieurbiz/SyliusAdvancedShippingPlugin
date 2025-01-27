@@ -5,7 +5,7 @@
  *
  * (c) Monsieur Biz <sylius@monsieurbiz.com>
  *
- * For the full copyright and license information, please view the LICENSE
+ * For the full copyright and license information, please view the LICENSE.txt
  * file that was distributed with this source code.
  */
 
@@ -17,6 +17,9 @@ use Sylius\Component\Resource\Model\ResourceInterface;
 use Sylius\Component\Resource\Model\TimestampableInterface;
 use Sylius\Component\Resource\Model\TranslatableInterface;
 
+/**
+ * @SuppressWarnings(PHPMD.LongClassName)
+ */
 interface ShippingAddressProviderConfigurationInterface extends ResourceInterface, TimestampableInterface, TranslatableInterface
 {
     public function getId(): int;

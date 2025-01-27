@@ -5,7 +5,7 @@
  *
  * (c) Monsieur Biz <sylius@monsieurbiz.com>
  *
- * For the full copyright and license information, please view the LICENSE
+ * For the full copyright and license information, please view the LICENSE.txt
  * file that was distributed with this source code.
  */
 
@@ -37,7 +37,7 @@ final class ChainedCalculatorConfigurationType extends AbstractType
         $choice = [];
         /** @var ShippingCalculatorConfigurationInterface $configuration */
         foreach ($this->shippingCalculatorConfigurationRepository->findAll() as $configuration) {
-            $key = sprintf('%s - %s', $configuration->getCode(), $configuration->getName());
+            $key = \sprintf('%s - %s', $configuration->getCode(), $configuration->getName());
             $choice[$configuration->getCalculator()][$key] = $configuration->getId();
         }
 

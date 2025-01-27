@@ -5,7 +5,7 @@
  *
  * (c) Monsieur Biz <sylius@monsieurbiz.com>
  *
- * For the full copyright and license information, please view the LICENSE
+ * For the full copyright and license information, please view the LICENSE.txt
  * file that was distributed with this source code.
  */
 
@@ -20,6 +20,9 @@ use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
 use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 
+/**
+ * @SuppressWarnings(PHPMD.LongClassName)
+ */
 final class MonsieurBizSyliusAdvancedShippingExtension extends Extension implements PrependExtensionInterface
 {
     use PrependDoctrineMigrationsTrait;

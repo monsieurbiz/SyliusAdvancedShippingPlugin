@@ -5,7 +5,7 @@
  *
  * (c) Monsieur Biz <sylius@monsieurbiz.com>
  *
- * For the full copyright and license information, please view the LICENSE
+ * For the full copyright and license information, please view the LICENSE.txt
  * file that was distributed with this source code.
  */
 
@@ -13,6 +13,8 @@ declare(strict_types=1);
 
 namespace MonsieurBiz\SyliusAdvancedShippingPlugin\Api\ColisPrivePickup;
 
+use DateTime;
+use Exception;
 use MonsieurBiz\SyliusAdvancedShippingPlugin\Api\ColisPrivePickup\Config\ColisPrivePickupConfigInterface;
 use MonsieurBiz\SyliusAdvancedShippingPlugin\Api\ColisPrivePickup\Model\PickupPointListQuery;
 use MonsieurBiz\SyliusAdvancedShippingPlugin\Api\ColisPrivePickup\Model\PickupPointListQueryInterface;
@@ -56,7 +58,7 @@ final class Client implements ClientInterface
 
         foreach ($params as $param => $getter) {
             if (empty($config->{$getter}())) {
-                throw new MissingApiConfigurationParamException(sprintf('The param %s is mandatory for Colis Privé client', $param));
+                throw new MissingApiConfigurationParamException(\sprintf('The param %s is mandatory for Colis Privé client', $param));
             }
         }
     }
@@ -78,11 +80,11 @@ final class Client implements ClientInterface
                 'lon' => $query->getLongitude() ?? '',
             ];
 
-            $url = sprintf('%s?%s', $this->config->getApiUrl(), http_build_query($params));
+            $url = \sprintf('%s?%s', $this->config->getApiUrl(), http_build_query($params));
             $response = $this->httpClient->request('GET', $url);
 
             return $this->transformResponseContent($response->toArray());
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             $this->logger?->error((string) $e);
 
             return [];
@@ -124,7 +126,7 @@ final class Client implements ClientInterface
 
             $openingDays = $this->createOpeningDays($pickupPointData['openingHours']);
             $pickupPoint->setOpeningsDays($openingDays);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             $this->logger?->error((string) $e->getMessage());
 
             return null;
@@ -143,7 +145,7 @@ final class Client implements ClientInterface
         $openingDays = [];
 
         foreach ($openingHoursData as $openingHourData) {
-            $dayCode = (int) (new \DateTime())->setTimestamp(strtotime($openingHourData['name']))->format('w');
+            $dayCode = (int) (new DateTime())->setTimestamp(strtotime($openingHourData['name']))->format('w');
             $openingDay = $openingDays[$dayCode] ?? new OpeningDay();
             $openingDay->setDayCode($dayCode);
             $slots = $openingDay->getTimeSlots() ?? [];

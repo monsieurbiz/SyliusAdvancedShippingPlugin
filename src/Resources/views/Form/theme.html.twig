@@ -24,7 +24,7 @@
                 {{- form_widget(form.location, {attr: {'data-target': 'location'}}) -}}
                 {{- form_widget(form.country, {attr: {'data-target': 'country'}}) -}}
                 {% if use_button %}
-                    <button data-target="button">{% include '/Components/Icons/index.html.twig' with { icon:'search', width:'16', height:'15' } %}<span class="is-hidden">{{ 'app.ui.search'|trans }}</span></button>
+                    <button data-target="button"><span class="is-hidden">{{ 'app.ui.search'|trans }}</span></button>
                 {% else %}
                     <i class="search icon"></i>
                 {% endif %}

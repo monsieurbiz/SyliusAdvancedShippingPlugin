@@ -5,7 +5,7 @@
  *
  * (c) Monsieur Biz <sylius@monsieurbiz.com>
  *
- * For the full copyright and license information, please view the LICENSE
+ * For the full copyright and license information, please view the LICENSE.txt
  * file that was distributed with this source code.
  */
 
@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace MonsieurBiz\SyliusAdvancedShippingPlugin\Form\Extension;
 
 use MonsieurBiz\SyliusAdvancedShippingPlugin\Entity\AddressTemporaryAwareInterface;
+use MonsieurBiz\SyliusAdvancedShippingPlugin\Entity\AdvancedShipmentMetadataAwareInterface;
 use MonsieurBiz\SyliusAdvancedShippingPlugin\Processor\AdvancedShippingProcessor;
 use Sylius\Bundle\CoreBundle\Form\Type\Checkout\SelectShippingType;
 use Sylius\Component\Core\Model\OrderInterface;
@@ -29,6 +30,9 @@ final class SelectShippingTypeExtension extends AbstractTypeExtension
     {
     }
 
+    /**
+     * @SuppressWarnings(PHPMD.CyclomaticComplexity)
+     */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         parent::buildForm($builder, $options);
@@ -42,7 +46,10 @@ final class SelectShippingTypeExtension extends AbstractTypeExtension
                 // Use original address to display the customer address in form.
                 $shippingAddress = $order->getShippingAddress();
                 if ($shippingAddress instanceof AddressTemporaryAwareInterface && $shippingAddress->isTemporary() && $order->hasShipments()) {
-                    $order->setShippingAddress($this->advancedShippingProcessor->getOriginalAddress($order->getShipments()->last()));
+                    $lastShipment = $order->getShipments()->last();
+                    if (null !== $lastShipment && $lastShipment instanceof AdvancedShipmentMetadataAwareInterface) {
+                        $order->setShippingAddress($this->advancedShippingProcessor->getOriginalAddress($lastShipment));
+                    }
                 }
             })
             ->addEventListener(FormEvents::POST_SUBMIT, function (FormEvent $event): void {

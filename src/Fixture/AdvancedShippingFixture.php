@@ -5,7 +5,7 @@
  *
  * (c) Monsieur Biz <sylius@monsieurbiz.com>
  *
- * For the full copyright and license information, please view the LICENSE
+ * For the full copyright and license information, please view the LICENSE.txt
  * file that was distributed with this source code.
  */
 
@@ -44,7 +44,7 @@ final class AdvancedShippingFixture extends AbstractFixture implements FixtureIn
         private EntityManagerInterface $shippingMethodManager,
         private EntityManagerInterface $shippingCalculatorConfigurationManager,
         private EntityManagerInterface $shippingAddressProviderConfigurationManager,
-        private EntityManagerInterface $shippingMethodRuleManager,
+        // private EntityManagerInterface $shippingMethodRuleManager,
         private FactoryInterface $shippingCalculatorConfigurationFactory,
         private FactoryInterface $shippingAddressProviderConfigurationFactory,
         private FactoryInterface $shippingCalculatorConfigurationTranslationFactory,
@@ -221,7 +221,7 @@ final class AdvancedShippingFixture extends AbstractFixture implements FixtureIn
 
     private function addChainedConfiguration(ShippingMethodInterface $method, array $calculatorConfigurations): void
     {
-        $currentConfiguration = $method->getConfiguration() ?? [];
+        $currentConfiguration = $method->getConfiguration();
         foreach ($calculatorConfigurations as $calculatorConfiguration) {
             $currentConfiguration['calculators'][$calculatorConfiguration->getId()] = $calculatorConfiguration->getId();
         }

@@ -5,7 +5,7 @@
  *
  * (c) Monsieur Biz <sylius@monsieurbiz.com>
  *
- * For the full copyright and license information, please view the LICENSE
+ * For the full copyright and license information, please view the LICENSE.txt
  * file that was distributed with this source code.
  */
 
@@ -16,6 +16,9 @@ namespace MonsieurBiz\SyliusAdvancedShippingPlugin\Form\Type\AddressProvider;
 use MonsieurBiz\SyliusAdvancedShippingPlugin\Form\Type\AdvancedShippingMetadata\AbstractAdvancedShippingMetadataType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
+/**
+ * @SuppressWarnings(PHPMD.LongClassName)
+ */
 final class ChronopostPickupAddressProviderMetadataType extends AbstractAdvancedShippingMetadataType
 {
     public function configureOptions(OptionsResolver $resolver): void

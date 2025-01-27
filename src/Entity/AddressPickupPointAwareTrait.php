@@ -5,7 +5,7 @@
  *
  * (c) Monsieur Biz <sylius@monsieurbiz.com>
  *
- * For the full copyright and license information, please view the LICENSE
+ * For the full copyright and license information, please view the LICENSE.txt
  * file that was distributed with this source code.
  */
 
@@ -20,11 +20,13 @@ trait AddressPickupPointAwareTrait
     /**
      * @ORM\Column(name="pickup_point_type", type="string", length=255, nullable=true)
      */
+    #[ORM\Column(name: 'pickup_point_type', type: 'string', length: 255, nullable: true)]
     private ?string $pickupPointType = null;
 
     /**
      * @ORM\Column(name="pickup_point_code", type="string", length=255, nullable=true)
      */
+    #[ORM\Column(name: 'pickup_point_code', type: 'string', length: 255, nullable: true)]
     private ?string $pickupPointCode = null;
 
     public function getPickupPointType(): ?string

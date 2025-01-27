@@ -5,7 +5,7 @@
  *
  * (c) Monsieur Biz <sylius@monsieurbiz.com>
  *
- * For the full copyright and license information, please view the LICENSE
+ * For the full copyright and license information, please view the LICENSE.txt
  * file that was distributed with this source code.
  */
 
@@ -24,6 +24,7 @@ trait TemporaryAddressesAwareTrait
      *
      * @var Collection<array-key, AddressInterface>
      */
+    #[ORM\OneToMany(targetEntity: AddressInterface::class, mappedBy: 'sourceOrder', cascade: ['persist'])]
     private Collection $temporaryAddresses;
 
     public function getTemporaryAddresses(): Collection

@@ -5,7 +5,7 @@
  *
  * (c) Monsieur Biz <sylius@monsieurbiz.com>
  *
- * For the full copyright and license information, please view the LICENSE
+ * For the full copyright and license information, please view the LICENSE.txt
  * file that was distributed with this source code.
  */
 
@@ -20,7 +20,6 @@ use Sylius\Component\Core\Model\Address as BaseAddress;
 
 /**
  * @ORM\Entity
- *
  * @ORM\Table(name="sylius_address")
  */
 #[ORM\Entity]

@@ -5,7 +5,7 @@
  *
  * (c) Monsieur Biz <sylius@monsieurbiz.com>
  *
- * For the full copyright and license information, please view the LICENSE
+ * For the full copyright and license information, please view the LICENSE.txt
  * file that was distributed with this source code.
  */
 
@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace MonsieurBiz\SyliusAdvancedShippingPlugin\Entity;
 
+use DateTimeInterface;
 use Sylius\Component\Resource\Model\TimestampableTrait;
 use Sylius\Component\Resource\Model\TranslatableTrait;
 
@@ -35,12 +36,12 @@ class MapProviderConfiguration implements MapProviderConfigurationInterface
     protected array $configuration = [];
 
     /**
-     * @var \DateTimeInterface|null
+     * @var DateTimeInterface|null
      */
     protected $createdAt;
 
     /**
-     * @var \DateTimeInterface|null
+     * @var DateTimeInterface|null
      */
     protected $updatedAt;
 
@@ -61,7 +62,7 @@ class MapProviderConfiguration implements MapProviderConfigurationInterface
 
     public function setProvider(?string $provider): void
     {
-        $this->provider = $provider;
+        $this->provider = (string) $provider;
     }
 
     public function getCode(): string
@@ -71,7 +72,7 @@ class MapProviderConfiguration implements MapProviderConfigurationInterface
 
     public function setCode(?string $code): void
     {
-        $this->code = $code;
+        $this->code = (string) $code;
     }
 
     public function getName(): string
@@ -81,7 +82,7 @@ class MapProviderConfiguration implements MapProviderConfigurationInterface
 
     public function setName(?string $name): void
     {
-        $this->getTranslation()->setName($name);
+        $this->getTranslation()->setName((string) $name);
     }
 
     public function getConfiguration(): array

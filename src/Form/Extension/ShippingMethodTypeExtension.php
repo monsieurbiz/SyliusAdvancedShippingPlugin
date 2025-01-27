@@ -5,7 +5,7 @@
  *
  * (c) Monsieur Biz <sylius@monsieurbiz.com>
  *
- * For the full copyright and license information, please view the LICENSE
+ * For the full copyright and license information, please view the LICENSE.txt
  * file that was distributed with this source code.
  */
 
@@ -41,7 +41,7 @@ final class ShippingMethodTypeExtension extends AbstractTypeExtension
                 'required' => false,
                 'class' => $this->shippingAddressProviderConfigurationClass,
                 'choice_label' => function (ShippingAddressProviderConfigurationInterface $configuration): string {
-                    return sprintf('%s - %s', $configuration->getCode(), $configuration->getName());
+                    return \sprintf('%s - %s', $configuration->getCode(), $configuration->getName());
                 },
                 'group_by' => 'provider',
                 'label' => 'monsieurbiz_advanced_shipping.form.shipping_address_provider',
